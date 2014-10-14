@@ -11,7 +11,7 @@
         .label.label-primary due this sprint
         .label.label-default future
 
-.container.main-area
+.container.main-area#main-area
   - @epics.each do |epic|
     %h3= epic[:epic_name]
     - epic[:milestones].each do |milestone|
