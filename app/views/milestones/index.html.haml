@@ -18,11 +18,14 @@
       - label_class = "label-#{milestone[:state]}"
       %h4
         %div{class:"label #{label_class}"}
-          = milestone[:name]
+          %a{href: milestone[:url_link], title: milestone[:key], style:"color:white"}
+            = milestone[:name]
         - if milestone[:resolved_at]
           %small{style:"padding-left: 20px"}= "Completed: #{milestone[:resolved_at].strftime("%a %d %b")}"
         - else
           %small{style:"padding-left: 20px"}= "Due: #{milestone[:due_at].strftime("%a %d %b")}"
         - if milestone[:warning]
-          %small{style:"color:red"}= milestone[:warning]
+          %small{style:"color:red"}
+            %a{href: milestone[:url_link]}
+              =milestone[:warning]
     %hr

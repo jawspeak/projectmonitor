@@ -4,10 +4,7 @@ require 'net/https'
 class JiraHttpClient
 
   def initialize(args = {})
-    # ConfigHelper didn't load settings.local.yml, oh well. Low QPS makes this ok.
-    jira_config = YAML.load_file(
-        File.join(Rails.root, 'config', 'settings.local.yml'))[Rails.env]
-
+    jira_config = SettingsLocalHelper.config
     @options = {username: jira_config['jira_username'],
                 password: jira_config['jira_password']}.merge(args)
   end
