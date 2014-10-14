@@ -20,12 +20,15 @@
         %div{class:"label #{label_class}"}
           %a{href: milestone[:url_link], title: milestone[:key], style:"color:white"}
             = milestone[:name]
+        %small{style:"padding-left: 15px"}= milestone[:assignee]
+        - if milestone[:url_assignee_avitar]
+          %img{src: milestone[:url_assignee_avitar]}
         - if milestone[:resolved_at]
           %small{style:"padding-left: 20px"}= "Completed: #{milestone[:resolved_at].strftime("%a %d %b")}"
+        - if milestone[:warning]
+          %small
+            %a{href: milestone[:url_link], style:"color:red"}
+              =milestone[:warning]
         - else
           %small{style:"padding-left: 20px"}= "Due: #{milestone[:due_at].strftime("%a %d %b")}"
-        - if milestone[:warning]
-          %small{style:"color:red"}
-            %a{href: milestone[:url_link]}
-              =milestone[:warning]
     %hr
