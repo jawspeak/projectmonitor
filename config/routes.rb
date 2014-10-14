@@ -8,6 +8,9 @@ ProjectMonitor::Application.routes.draw do
   get 'heroku_status' => 'home#heroku_status', format: :json
   get 'rubygems_status' => 'home#rubygems_status', format: :json
 
+  # jaw's support of getting jira milestones and rendering them.
+  get "milestones" => "milestones#index"
+
   post 'projects/validate_tracker_project'
   patch 'projects/validate_build_info'
 

@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    %title Milestones
+    = stylesheet_link_tag "jaw"
+    = javascript_include_tag "application"
+    = csrf_meta_tag
+    %script{src: "//fast.fonts.com/jsapi/14aea2b8-37b7-4a31-afb9-e44414bef419.js", type: "text/javascript"}
+  %body{role:"document"}
+    = yield
+    #footer
+      .left
+      .right
