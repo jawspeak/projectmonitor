@@ -40,7 +40,7 @@ class MilestonesController < ApplicationController
        key: m['key'],
        url_link: "#{SettingsLocalHelper.config['base_jira_url']}browse/#{m['key']}",
        assignee: f['assignee'].nil? ? 'unassigned' : f['assignee']['name'],
-       url_assignee_avitar: f['assignee'].nil? ? nil : f['assignee']['avatarUrls']['24x24'],
+       url_assignee_avitar: f['assignee'].nil? ? nil : f['assignee']['avatarUrls']['32x32'],
        created_at: parse_datetime_local(f['created']),
        due_at: f['duedate'].nil? ? 1.day.ago : parse_datetime_local(f['duedate']), #make due in past and warn!
        warning: f['duedate'].nil? ? "Warning: No due date! " : nil,

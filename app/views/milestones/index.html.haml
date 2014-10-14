@@ -16,7 +16,7 @@
     %h3= epic[:epic_name]
     - epic[:milestones].each do |milestone|
       - label_class = "label-#{milestone[:state]}"
-      %h4
+      %h3
         %div{class:"label #{label_class}"}
           %a{href: milestone[:url_link], title: milestone[:key], style:"color:white"}
             = milestone[:name]
