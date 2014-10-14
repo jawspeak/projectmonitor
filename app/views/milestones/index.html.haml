@@ -1,15 +1,25 @@
-.navbar.navbar-inverse.navbar-fixed-top{role:"navigation"}
+.navbar.navbar-inverse.navbar-fixed-bottom{role:"navigation"}
   .container
     .navbar-header.row
-      .col-xs-9
+      .col-xs-8
         %h1{style:"color:#f1f1f1"} Upcoming Project Milestones
-      .col-xs-3
-        %small{style:"color:#f5f5f5"} key:
-        .label.label-success done
-        .label.label-danger overdue
-        .label.label-warning due today
-        .label.label-primary due this sprint
-        .label.label-default future
+      .col-xs-4
+        %small{style:"color:#f5f5f5"} legend:
+        %div{style:"font-size:120%"}
+          .label.label-success done
+          .label.label-danger overdue
+          .label.label-warning due today
+          .label.label-primary due this sprint
+          - if params[:future]
+            .label.label-default future
+        %p
+          %small
+          - if params[:future]
+            %a{href: "/milestones", style:"color:#d8d8d8;text-decoration:underline;"}
+              hide future
+          - else
+            %a{href: "/milestones?future=1", style:"color:white;text-decoration:underline;"}
+              show future
 
 .container.main-area#main-area
   - @epics.each do |epic|

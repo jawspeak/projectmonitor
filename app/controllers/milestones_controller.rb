@@ -65,6 +65,10 @@ class MilestonesController < ApplicationController
       milestones = found_milestones.select{|m| m[:epic_key].to_sym == epic_key}.sort_by{|m| m[:due_at]}.map do |m|
         m.merge(state: pick_state(m))
       end
+
+      if params[:future].nil? #ted requested not to see future work here by default
+        milestones.reject!{|m| m[:state] == 'default'}
+      end
       @epics << { epic_name: found_epics[epic_key], milestones: milestones }
     end
     @epics.sort_by!{|e| e[:epic_name].to_s}
