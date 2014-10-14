@@ -39,6 +39,8 @@ class MilestonesController < ApplicationController
       {name: f['summary'].gsub(/milestone[:]? /i, '').gsub(/▲[ ]*/, '').gsub(/ [ ]+/, ' '), #cleaner, shorter name
        key: m['key'],
        url_link: "#{SettingsLocalHelper.config['base_jira_url']}browse/#{m['key']}",
+       assignee: f['assignee'].nil? ? 'unassigned' : f['assignee']['name'],
+       url_assignee_avitar: f['assignee'].nil? ? nil : f['assignee']['avatarUrls']['24x24'],
        created_at: parse_datetime_local(f['created']),
        due_at: f['duedate'].nil? ? 1.day.ago : parse_datetime_local(f['duedate']), #make due in past and warn!
        warning: f['duedate'].nil? ? "Warning: No due date! " : nil,
@@ -61,12 +63,7 @@ class MilestonesController < ApplicationController
     @epics = []
     epics_in_milestones.each do |epic_key|
       milestones = found_milestones.select{|m| m[:epic_key].to_sym == epic_key}.sort_by{|m| m[:due_at]}.map do |m|
-        {name: m[:name],
-         due_at: m[:due_at],
-         resolved_at: m[:resolved_at],
-         url_link: m[:url_link],
-         warning: m[:warning],
-         state: pick_state(m)}
+        m.merge(state: pick_state(m))
       end
       @epics << { epic_name: found_epics[epic_key], milestones: milestones }
     end
